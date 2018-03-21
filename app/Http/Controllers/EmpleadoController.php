@@ -17,7 +17,9 @@ class EmpleadoController extends Controller
     public function index()
     {
         //
-        return view('empleados.index');
+        $empleados = Empleado::paginate(10);
+        //dd($empleados)->toArray();
+        return view('empleados.index', ['empleados' => $empleados]);
     }
 
     /**
@@ -102,6 +104,13 @@ class EmpleadoController extends Controller
     public function edit($id)
     {
         //
+        $empleado = Empleado::find($id);
+        $sexos = array('HOMBRE' => 'HOMBRE',
+                        'MUJER' => 'MUJER' );
+        $turnos = Turno::all()->pluck('descripcion', 'id');
+        $departamentos = Departamento::all()->pluck('descripcion', 'id');
+        return view('empleados.edit', compact('empleado', 'sexos', 'turnos', 'departamentos'));
+
     }
 
     /**
@@ -114,6 +123,21 @@ class EmpleadoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $empleado = Empleado::find($id);
+        
+        $empleado->matricula = $request->input('matricula');
+        $empleado->paterno = $request->input('paterno');
+        $empleado->materno = $request->input('materno'); 
+        $empleado->nombre = $request->input('nombre'); 
+        $empleado->fecha_nacimiento = $request->input('fecha_nacimiento');
+        $empleado->sexo = $request->input('sexo');
+        $empleado->id_departamento = $request->input('id_departamento');
+        $empleado->id_turno = $request->input('id_turno');  
+        $empleado->save();   
+        //dd($empleado);
+        $empleados = Empleado::paginate(10);
+        return view('empleados.index', ['empleados' => $empleados]);
+
     }
 
     /**
@@ -125,5 +149,10 @@ class EmpleadoController extends Controller
     public function destroy($id)
     {
         //
+        $empleado = Empleado::find($id);
+        $empleado->delete();
+         $empleados = Empleado::paginate(10);
+        return view('empleados.index', ['empleados' => $empleados]);
+
     }
 }

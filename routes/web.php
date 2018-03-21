@@ -15,9 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/empleados', 'EmpleadoController@index');
-Route::get('/empleados/create', 'EmpleadoController@create');
-Route::post('/empleados/store', 'EmpleadoController@store');
+// Route::get('/empleados', 'EmpleadoController@index');
+// Route::get('/empleados/create', 'EmpleadoController@create');
+// Route::post('/empleados/store', 'EmpleadoController@store');
+
+Route::resource('/empleados', 'EmpleadoController');
 // Route::get('/empleados', function(){
 // 	return view('Empleados.index');
 // });
