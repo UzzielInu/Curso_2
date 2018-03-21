@@ -33,7 +33,7 @@
 				<td>{!! $empleado->sexo !!}</td>
 				<td>{!! $empleado->id_turno !!}</td>
 				<td>{!! $empleado->id_departamento !!}</td>
-				<td><a href="/empleados/{!!$empleado->id!!}/edit">Editar</a>
+				<td><a class="btn btn-warning btn-sm btn-block" href="/empleados/{!!$empleado->id!!}/edit">Editar</a>
 
 				<!-- <td>{!! Form::model($empleado,['route' => ['empleados.destroy', $empleado->id], 'method' => 'DELETE']) !!}
 					{!! Form::submit('Eliminar')!!}
@@ -41,7 +41,8 @@
 				</td> -->
 
 				{!! Form::model($empleado,['route' => ['empleados.destroy', $empleado->id], 'method' => 'DELETE']) !!}
-					{!! Form::submit('Eliminar')!!}
+					<button type="submit" class="btn btn-danger btn-sm btn-block">Eliminar</button>
+					<!-- {!! Form::submit('Eliminar')!!} -->
 					{!! Form::close() !!}
 				</td>
 				<!-- <td><a href="empleados/{!!$empleado->id!!}/destroy">Eliminar</a></td> -->
