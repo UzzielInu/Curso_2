@@ -80,6 +80,8 @@ class EmpleadoController extends Controller
             else{
                 echo "AAAAAAAAAA PEEEEEEEEEEERRRRRRROOO traaaes el ooooooooocnitriiiiiix";
             }
+
+            return view('empleados.index',['estatus' => $empleado]);
         
 
     }
@@ -135,8 +137,7 @@ class EmpleadoController extends Controller
         $empleado->id_turno = $request->input('id_turno');  
         $empleado->save();   
         //dd($empleado);
-        $empleados = Empleado::paginate(10);
-        return view('empleados.index', ['empleados' => $empleados]);
+        return $this->index();
 
     }
 
@@ -151,8 +152,7 @@ class EmpleadoController extends Controller
         //
         $empleado = Empleado::find($id);
         $empleado->delete();
-         $empleados = Empleado::paginate(10);
-        return view('empleados.index', ['empleados' => $empleados]);
+        return $this->index();
 
     }
 }

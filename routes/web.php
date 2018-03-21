@@ -19,7 +19,7 @@ Route::get('/', function () {
 // Route::get('/empleados/create', 'EmpleadoController@create');
 // Route::post('/empleados/store', 'EmpleadoController@store');
 
-Route::resource('/empleados', 'EmpleadoController');
+Route::resource('/empleados', 'EmpleadoController',['middleware' => ['auth']]);
 // Route::get('/empleados', function(){
 // 	return view('Empleados.index');
 // });
@@ -28,3 +28,7 @@ Route::resource('/empleados', 'EmpleadoController');
 // 	Route::resource('empleados', 'Rhumanos\EmpleadoController');
 // });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
